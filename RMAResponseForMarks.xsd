@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://com.ca.ceil.integration/rm/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="GetItemMarksReturnResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="GetItemMarksReturnResult">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Success" type="xs:boolean" />
+							<xs:element name="ErrorCategory" type="xs:int" />
+							<xs:element name="itemArray">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="ItemMarksReturnData">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="ArrayOfItemMarksReturnData">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Product">
+																	<xs:complexType>
+																		<xs:sequence>
+																			<xs:element name="Session">
+																				<xs:complexType>
+																					<xs:sequence>
+																						<xs:element name="Name">
+																							<xs:simpleType>
+																								<xs:restriction base="xs:string">
+																									<xs:minLength value="1"></xs:minLength>
+																								</xs:restriction>
+																							</xs:simpleType>
+																						</xs:element>
+																					</xs:sequence>
+																					<xs:attribute name="id">
+																						<xs:simpleType>
+																							<xs:restriction base="xs:string">
+																								<xs:minLength value="1"></xs:minLength>
+																							</xs:restriction>
+																						</xs:simpleType>
+																					</xs:attribute>
+																					<xs:attribute name="month">
+																						<xs:simpleType>
+																							<xs:restriction base="xs:string">
+																								<xs:minLength value="1"></xs:minLength>
+																							</xs:restriction>
+																						</xs:simpleType>
+																					</xs:attribute>
+																					<xs:attribute name="year">
+																						<xs:simpleType>
+																							<xs:restriction base="xs:string">
+																								<xs:minLength value="1"></xs:minLength>
+																							</xs:restriction>
+																						</xs:simpleType>
+																					</xs:attribute>
+																				</xs:complexType>
+																			</xs:element>
+																			<xs:element name="Assessment">
+																				<xs:complexType>
+																					<xs:sequence>
+																						<xs:element name="Name">
+																							<xs:simpleType>
+																								<xs:restriction base="xs:string">
+																									<xs:minLength value="1"></xs:minLength>
+																								</xs:restriction>
+																							</xs:simpleType>
+																						</xs:element>
+																					</xs:sequence>
+																					<xs:attribute name="code">
+																						<xs:simpleType>
+																							<xs:restriction base="xs:string">
+																								<xs:minLength value="1"></xs:minLength>
+																							</xs:restriction>
+																						</xs:simpleType>
+																					</xs:attribute>
+																					<xs:attribute name="version" type="xs:string" use="required" />
+																				</xs:complexType>
+																			</xs:element>
+																			<xs:element name="Component">
+																				<xs:complexType>
+																					<xs:sequence>
+																						<xs:element name="Name">
+																							<xs:simpleType>
+																								<xs:restriction base="xs:string">
+																									<xs:minLength value="1"></xs:minLength>
+																								</xs:restriction>
+																							</xs:simpleType>
+																						</xs:element>
+																					</xs:sequence>
+																					<xs:attribute name="id">
+																						<xs:simpleType>
+																							<xs:restriction base="xs:string">
+																								<xs:minLength value="1"></xs:minLength>
+																							</xs:restriction>
+																						</xs:simpleType>
+																					</xs:attribute>
+																					<xs:attribute name="version">
+																						<xs:simpleType>
+																							<xs:restriction base="xs:string">
+																								<xs:minLength value="1"></xs:minLength>
+																							</xs:restriction>
+																						</xs:simpleType>
+																					</xs:attribute>
+																				</xs:complexType>
+																			</xs:element>
+																		</xs:sequence>
+																		<xs:attribute name="business_stream">
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:minLength value="1"></xs:minLength>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:attribute>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="Centre">
+																	<xs:complexType>
+																		<xs:attribute name="number">
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:minLength value="1"></xs:minLength>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:attribute>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="Candidate">
+																	<xs:complexType>
+																		<xs:sequence>
+																			<xs:element name="Name" type="xs:string" />
+																			<xs:element name="UCI">
+																				<xs:complexType>
+																					<xs:sequence>
+																						<xs:element name="Id">
+																							<xs:simpleType>
+																								<xs:restriction base="xs:long">
+																									<xs:minInclusive value="0" />
+																								</xs:restriction>
+																							</xs:simpleType>
+																						</xs:element>
+																					</xs:sequence>
+																					<xs:attribute name="type">
+																						<xs:simpleType>
+																							<xs:restriction base="xs:string">
+																								<xs:minLength value="1"></xs:minLength>
+																							</xs:restriction>
+																						</xs:simpleType>
+																					</xs:attribute>
+																				</xs:complexType>
+																			</xs:element>
+																		</xs:sequence>
+																		<xs:attribute name="number">
+																			<xs:simpleType>
+																				<xs:restriction base="xs:long">
+																					<xs:minInclusive value="0" />
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:attribute>
+																		<xs:attribute name="gender">
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:minLength value="1"></xs:minLength>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:attribute>
+																		<xs:attribute name="DOB" type="xs:date" use="required" />
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="marking_method">
+																	<xs:simpleType>
+																		<xs:restriction base="xs:string">
+																			<xs:minLength value="1"></xs:minLength>
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
+																<xs:element name="ItemGroups">
+																	<xs:complexType>
+																		<xs:sequence>
+																			<xs:element name="Marker">
+																				<xs:complexType>
+																					<xs:attribute name="id">
+																						<xs:simpleType>
+																							<xs:restriction base="xs:string">
+																								<xs:minLength value="1"></xs:minLength>
+																							</xs:restriction>
+																						</xs:simpleType>
+																					</xs:attribute>
+																					<xs:attribute name="type">
+																						<xs:simpleType>
+																							<xs:restriction base="xs:string">
+																								<xs:minLength value="1"></xs:minLength>
+																							</xs:restriction>
+																						</xs:simpleType>
+																					</xs:attribute>
+																					<xs:attribute name="panel">
+																						<xs:simpleType>
+																							<xs:restriction base="xs:string">
+																								<xs:minLength value="1"></xs:minLength>
+																							</xs:restriction>
+																						</xs:simpleType>
+																					</xs:attribute>
+																					<xs:attribute name="team">
+																						<xs:simpleType>
+																							<xs:restriction base="xs:string">
+																								<xs:minLength value="1"></xs:minLength>
+																							</xs:restriction>
+																						</xs:simpleType>
+																					</xs:attribute>
+																					<xs:attribute name="position">
+																						<xs:simpleType>
+																							<xs:restriction base="xs:string">
+																								<xs:minLength value="1"></xs:minLength>
+																							</xs:restriction>
+																						</xs:simpleType>
+																					</xs:attribute>
+																					<xs:attribute name="board">
+																						<xs:simpleType>
+																							<xs:restriction base="xs:string">
+																								<xs:minLength value="1"></xs:minLength>
+																							</xs:restriction>
+																						</xs:simpleType>
+																					</xs:attribute>
+																					<xs:attribute name="Priority" type="xs:integer" use="required" />
+																				</xs:complexType>
+																			</xs:element>
+																			<xs:element name="RIGMarkGroupIdentifier" type="xs:integer" />
+																			<xs:element name="MarksScheme">
+																				<xs:complexType>
+																					<xs:sequence>
+																						<xs:element maxOccurs="unbounded" name="MarkScheme">
+																							<xs:complexType>
+																								<xs:attribute name="item_mark_scheme_id">
+																									<xs:simpleType>
+																										<xs:restriction base="xs:integer">
+																											<xs:minInclusive value="0" />
+																										</xs:restriction>
+																									</xs:simpleType>
+																								</xs:attribute>
+																								<xs:attribute name="numeric">
+																									<xs:simpleType>
+																										<xs:restriction base="xs:integer">
+																											<xs:minInclusive value="0" />
+																										</xs:restriction>
+																									</xs:simpleType>
+																								</xs:attribute>
+																								<xs:attribute name="isNonNumeric" type="xs:boolean" use="required" />
+																							</xs:complexType>
+																						</xs:element>
+																					</xs:sequence>
+																				</xs:complexType>
+																			</xs:element>
+																		</xs:sequence>
+																		<xs:attribute name="item_group_id">
+																			<xs:simpleType>
+																				<xs:restriction base="xs:integer">
+																					<xs:minInclusive value="0" />
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:attribute>
+																		<xs:attribute name="markingMode">
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:minLength value="1"></xs:minLength>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:attribute>
+																		<xs:attribute name="markingDate" type="xs:dateTime" use="required" />
+																		<xs:attribute name="remark" type="xs:boolean" use="required" />
+																	</xs:complexType>
+																</xs:element>
+																 <xs:element name="question_paper_id" type="xs:long" />
+															</xs:sequence>
+															<xs:attribute name="message_type">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:minLength value="1"></xs:minLength>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="message_type_version">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:minLength value="1"></xs:minLength>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="produced_date" type="xs:dateTime" use="required" />
+															<xs:attribute name="ack_id">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:minLength value="1"></xs:minLength>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="candidate_exam_entry_id">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:minLength value="1"></xs:minLength>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetItemMarksReturnCEILResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="message" type="xs:string" />
+				<xs:element name="code" type="xs:int" />
+				<xs:element name="errorDetails" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="errorDescription" type="xs:string" maxOccurs="unbounded"></xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

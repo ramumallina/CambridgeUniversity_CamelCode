@@ -1,0 +1,16 @@
+import com.ca.ceil.marking.svc.model.Order;
+
+
+rule "INSPERA"
+	when
+		orderObject : Order(confidenceScore>=requiredValueCS && hmf!= requiredValueHMF && hmf%requiredValueHMF!=0);
+	then
+		orderObject.setValue("Inspera");
+end;
+
+rule "RMA"
+	when
+		orderObject : Order((confidenceScore>=requiredValueCS && (hmf== requiredValueHMF || hmf%requiredValueHMF==0))||(confidenceScore<requiredValueCS));
+	then
+		orderObject.setValue("RMA");
+end;

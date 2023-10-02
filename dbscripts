@@ -1,0 +1,288 @@
+
+
+CREATE TABLE IF NOT EXISTS public.candidate_long_answer_details
+(
+    candidate_inspera_id integer NOT NULL,
+    candidate_bp_id integer,
+    question_id integer NOT NULL,
+    question_content_item_id integer NOT NULL,
+    rma_html_file_identifier character varying(40) COLLATE pg_catalog."default",
+    product_source_identifier character varying(40) COLLATE pg_catalog."default",
+    question_title character varying(40) COLLATE pg_catalog."default",
+    create_date timestamp without time zone,
+    candidate_answer text COLLATE pg_catalog."default",
+    for_elit character varying(40) COLLATE pg_catalog."default",
+    for_rma character varying(40) COLLATE pg_catalog."default",
+    sent_to_elit timestamp without time zone,
+    sent_to_rma timestamp without time zone,
+    elit_answer_uuid text COLLATE pg_catalog."default",
+    elit_submission_uuid text COLLATE pg_catalog."default",
+    rma_test_identifier integer,
+    duration_seconds integer,
+    part_number character varying COLLATE pg_catalog."default",
+    test_id character varying COLLATE pg_catalog."default",
+    test_assessment_title character varying COLLATE pg_catalog."default",
+    line_item_id character varying COLLATE pg_catalog."default",
+    CONSTRAINT candidate_long_answer_details_pkey PRIMARY KEY (candidate_inspera_id, question_id, question_content_item_id)
+)
+
+CREATE TABLE IF NOT EXISTS public.ceil_marking_briefingcomment
+(
+    auto_generated_id integer NOT NULL DEFAULT nextval('ceil_marking_briefingcomment_auto_generated_id_seq'::regclass),
+    question_id numeric NOT NULL,
+    briefing_comments character varying COLLATE pg_catalog."default",
+    file_name character varying(100) COLLATE pg_catalog."default",
+    date_created timestamp without time zone,
+    CONSTRAINT ceil_marking_briefingcomment_pkey PRIMARY KEY (auto_generated_id)
+)
+
+CREATE TABLE IF NOT EXISTS public.dsmc_aggregate_mark
+(
+    legacy_centre_number character varying COLLATE pg_catalog."default" NOT NULL,
+    candidate_center_id character varying COLLATE pg_catalog."default" NOT NULL,
+    program_of_study character varying COLLATE pg_catalog."default" NOT NULL,
+    exam_type character varying COLLATE pg_catalog."default",
+    recorded_mark_date character varying COLLATE pg_catalog."default",
+    sitting character varying COLLATE pg_catalog."default",
+    delivery_method character varying COLLATE pg_catalog."default",
+    key_assessment_date character varying COLLATE pg_catalog."default",
+    assessor_id character varying COLLATE pg_catalog."default",
+    interlocutor_id character varying COLLATE pg_catalog."default",
+    aggregate_mark character varying COLLATE pg_catalog."default",
+    sent_to_inspera boolean,
+    inspera_flag boolean,
+    CONSTRAINT dsmc_aggregate_mark_pkey PRIMARY KEY (program_of_study, legacy_centre_number, candidate_center_id)
+)
+
+CREATE TABLE IF NOT EXISTS public.dsmc_aggregate_product_details
+(
+    product_name character varying(40) COLLATE pg_catalog."default" NOT NULL,
+    product_id character varying(40) COLLATE pg_catalog."default",
+    criteria character varying(40) COLLATE pg_catalog."default" NOT NULL,
+    code character varying(40) COLLATE pg_catalog."default",
+    weightage integer,
+    CONSTRAINT dsmc_aggregate_pkey PRIMARY KEY (product_name, criteria)
+)
+
+CREATE TABLE IF NOT EXISTS public.dsmc_categories
+(
+    category_id numeric NOT NULL,
+    display_name character varying COLLATE pg_catalog."default",
+    code character varying COLLATE pg_catalog."default",
+    name character varying COLLATE pg_catalog."default",
+    created_at timestamp with time zone,
+    updated_at timestamp without time zone,
+    sequence_id numeric,
+    CONSTRAINT dsmc_categories_pkey PRIMARY KEY (category_id)
+)
+
+CREATE TABLE IF NOT EXISTS public.dsmc_item_marks
+(
+    legacy_centre_number character varying COLLATE pg_catalog."default",
+    candidate_center_id character varying COLLATE pg_catalog."default",
+    program_of_study character varying COLLATE pg_catalog."default",
+    code character varying COLLATE pg_catalog."default",
+    value character varying COLLATE pg_catalog."default",
+    examiner_id character varying COLLATE pg_catalog."default"
+)
+
+CREATE TABLE IF NOT EXISTS public.dsmc_priming
+(
+    priming_id numeric NOT NULL,
+    program_of_study character varying COLLATE pg_catalog."default",
+    exam_type numeric,
+    version numeric,
+    min_value character varying COLLATE pg_catalog."default",
+    max_value character varying COLLATE pg_catalog."default",
+    category_id numeric NOT NULL,
+    CONSTRAINT dsmc_priming_pkey PRIMARY KEY (priming_id, category_id)
+)
+
+CREATE TABLE IF NOT EXISTS public.elit_marks
+(
+    answer_uuid character varying(100) COLLATE pg_catalog."default",
+    grader_id integer NOT NULL,
+    overall character varying(100) COLLATE pg_catalog."default",
+    confidence_score numeric(2,1),
+    hmf_flag boolean,
+    created_date timestamp without time zone,
+    data_sent boolean
+)
+
+CREATE TABLE IF NOT EXISTS public.elit_priming
+(
+    question_id integer NOT NULL,
+    question_content_item_id integer NOT NULL,
+    question_uuid character varying(100) COLLATE pg_catalog."default",
+    question_uuid_status character varying(100) COLLATE pg_catalog."default",
+    question_desc text COLLATE pg_catalog."default",
+    current_value character varying(100) COLLATE pg_catalog."default",
+    prev_value character varying(100) COLLATE pg_catalog."default",
+    create_date timestamp without time zone,
+    sent_date timestamp without time zone,
+    http_status_code integer,
+    image_name character varying COLLATE pg_catalog."default",
+    media_uuid character varying COLLATE pg_catalog."default",
+    metadata character varying COLLATE pg_catalog."default",
+    revision_id integer
+)
+
+CREATE TABLE IF NOT EXISTS public.mark_scheme_reference
+(
+    mark_id integer NOT NULL,
+    mark_scheme_identifier integer,
+    mark_scheme_name character varying(100) COLLATE pg_catalog."default",
+    mark_type_identifier integer,
+    max_mark integer,
+    min_mark integer,
+    CONSTRAINT mark_scheme_reference_pkey PRIMARY KEY (mark_id)
+)
+
+CREATE TABLE IF NOT EXISTS public.product_lookup_table
+(
+    programme_of_study_identifier character varying COLLATE pg_catalog."default" NOT NULL,
+    product_name character varying COLLATE pg_catalog."default",
+    component character varying COLLATE pg_catalog."default",
+    ceil_marking_mode character varying COLLATE pg_catalog."default",
+    hybrid_marking_floor integer,
+    acceptable_confidence numeric(2,1),
+    elit_automarking_template_identifier character varying(100) COLLATE pg_catalog."default",
+    status character varying(100) COLLATE pg_catalog."default",
+    elit_automarking_template_version integer,
+    CONSTRAINT product_lookup_table_pkey PRIMARY KEY (programme_of_study_identifier)
+)
+
+CREATE TABLE IF NOT EXISTS public.rma_item_marks
+(
+    session_id character varying COLLATE pg_catalog."default",
+    candidate_id character varying COLLATE pg_catalog."default",
+    item_mark_scheme_id character varying COLLATE pg_catalog."default" NOT NULL,
+    "numeric" integer,
+    is_non_numeric boolean,
+    CONSTRAINT rma_item_marks_pkey PRIMARY KEY (item_mark_scheme_id)
+)
+
+CREATE TABLE IF NOT EXISTS public.rma_marks
+(
+    ack_id character varying COLLATE pg_catalog."default",
+    candidate_exam_entry_id character varying COLLATE pg_catalog."default",
+    session_id character varying COLLATE pg_catalog."default" NOT NULL,
+    uci_id character varying COLLATE pg_catalog."default" NOT NULL,
+    marking_method character varying COLLATE pg_catalog."default",
+    item_group_id character varying COLLATE pg_catalog."default",
+    marking_mode character varying COLLATE pg_catalog."default",
+    remark boolean,
+    marker_id character varying COLLATE pg_catalog."default",
+    mark_group_identifier character varying COLLATE pg_catalog."default",
+    produced_date character varying COLLATE pg_catalog."default",
+    marking_date character varying COLLATE pg_catalog."default",
+    aggregate_marks character varying COLLATE pg_catalog."default",
+    panel_id character varying COLLATE pg_catalog."default",
+    CONSTRAINT rma_marks_pkey PRIMARY KEY (session_id, uci_id)
+)
+
+CREATE TABLE IF NOT EXISTS public.rma_priming
+(
+    priming_id integer NOT NULL,
+    product_name character varying(40) COLLATE pg_catalog."default",
+    programme_of_study_identifier character varying(40) COLLATE pg_catalog."default",
+    session_identifier integer NOT NULL,
+    assessment_name character varying(50) COLLATE pg_catalog."default",
+    component_identifier character varying(50) COLLATE pg_catalog."default",
+    component_name character varying(50) COLLATE pg_catalog."default",
+    test_start_date character varying(50) COLLATE pg_catalog."default",
+    long_question_no character varying(50) COLLATE pg_catalog."default",
+    test_identifier integer,
+    question_item_group_identifier integer,
+    record_indicator character varying(10) COLLATE pg_catalog."default",
+    qppd_sent_status character varying(20) COLLATE pg_catalog."default",
+    session_name character varying(100) COLLATE pg_catalog."default",
+    max_marks integer,
+    qpmssd_sent_status character varying(20) COLLATE pg_catalog."default",
+    marking_identifier integer,
+    assessment_identifier character varying(50) COLLATE pg_catalog."default",
+    sent_to_sap timestamp without time zone,
+    CONSTRAINT rma_priming_pkey PRIMARY KEY (priming_id)
+)
+
+CREATE TABLE IF NOT EXISTS public.session_schemes_marks
+(
+    id integer NOT NULL,
+    mark_type_identifier integer,
+    test_identifier integer,
+    CONSTRAINT session_schemes_marks_pkey PRIMARY KEY (id)
+)
+
+CREATE TABLE IF NOT EXISTS public.candidate_details
+(
+    ceilcandidateid integer NOT NULL DEFAULT nextval('candidate_details_ceilcandidateid_seq'::regclass),
+    candidatebpid bigint NOT NULL,
+    candidateparentbpid bigint,
+    firstname text COLLATE pg_catalog."default" NOT NULL,
+    lastname text COLLATE pg_catalog."default" NOT NULL,
+    username text COLLATE pg_catalog."default" NOT NULL,
+    email text COLLATE pg_catalog."default" NOT NULL,
+    gender text COLLATE pg_catalog."default" NOT NULL,
+    dob date NOT NULL,
+    testcentreid text COLLATE pg_catalog."default" NOT NULL,
+    candidateinsperaid integer,
+    orgunit text COLLATE pg_catalog."default",
+    orgunitmembership text COLLATE pg_catalog."default",
+    centrecandidateid integer NOT NULL,
+    datecreated timestamp without time zone,
+    dateupdated timestamp without time zone,
+    CONSTRAINT candidate_details_pkey PRIMARY KEY (ceilcandidateid),
+    CONSTRAINT uq_businesspartners UNIQUE (candidatebpid, candidateparentbpid)
+)
+
+CREATE TABLE IF NOT EXISTS public.test_details
+(
+    testeventid text COLLATE pg_catalog."default" NOT NULL,
+    programofstudy text COLLATE pg_catalog."default" NOT NULL,
+    portalname text COLLATE pg_catalog."default",
+    packingcode text COLLATE pg_catalog."default",
+    invigilationcode text COLLATE pg_catalog."default",
+    keyassessmentdate date NOT NULL,
+    testcentrecountry text COLLATE pg_catalog."default",
+    testcentrecountrytimezone text COLLATE pg_catalog."default",
+    testcentreid text COLLATE pg_catalog."default" NOT NULL,
+    testcentrename text COLLATE pg_catalog."default",
+    testcentrelanguagecode text COLLATE pg_catalog."default",
+    templateid integer NOT NULL,
+    insperaparenttestid integer,
+    teststartdate timestamp without time zone,
+    testenddate timestamp without time zone,
+    datecreated timestamp without time zone,
+    dateupdated timestamp without time zone,
+    CONSTRAINT test_details_pkey PRIMARY KEY (testeventid)
+)
+
+CREATE TABLE IF NOT EXISTS public.candidate_booking_details
+(
+    candidatebookingdetailsid text COLLATE pg_catalog."default" NOT NULL,
+    testeventid text COLLATE pg_catalog."default",
+    ceilcandidateid integer,
+    insperaparenttestid integer,
+    insperamoduletestid integer NOT NULL,
+    bookingstatus text COLLATE pg_catalog."default",
+    moduleid text COLLATE pg_catalog."default",
+    datecreated timestamp without time zone,
+    dateupdated timestamp without time zone,
+    CONSTRAINT pk_candidate_booking_details PRIMARY KEY (candidatebookingdetailsid, insperamoduletestid),
+    CONSTRAINT uq_candidate_booking_details UNIQUE (testeventid, ceilcandidateid, insperaparenttestid, insperamoduletestid),
+    CONSTRAINT candidate_booking_details_ceilcandidateid_fkey FOREIGN KEY (ceilcandidateid)
+        REFERENCES public.candidate_details (ceilcandidateid) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT candidate_booking_details_testeventid_fkey FOREIGN KEY (testeventid)
+        REFERENCES public.test_details (testeventid) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+CREATE TABLE IF NOT EXISTS public.country_language_code
+(
+    country_code character varying(3) COLLATE pg_catalog."default" NOT NULL,
+    language_code character varying(3) COLLATE pg_catalog."default",
+    CONSTRAINT country_language_code_pkey PRIMARY KEY (country_code)
+)

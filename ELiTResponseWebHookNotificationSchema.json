@@ -1,0 +1,163 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "account-id": {
+          "type": "string"
+        },
+        "submission-id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "account-id",
+        "submission-id"
+      ]
+    },
+    "notification": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "results": {
+          "type": "object",
+          "properties": {
+            "parts": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "part": {
+                      "type": "integer"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "answers": {
+                      "type": "array",
+                      "items": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "grader-results": {
+                              "type": "array",
+                              "items": [
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "grader-id": {
+                                      "type": "integer"
+                                    },
+                                    "results": {
+                                      "type": "object",
+                                      "properties": {
+                                        "overall": {
+                                          "type": "number"
+                                        },
+                                        "confidence": {
+                                          "type": "number"
+                                        }
+                                      },
+                                      "required": [
+                                        "overall",
+                                        "confidence"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "grader-id",
+                                    "results"
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "grader-results"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "grader-results": {
+                              "type": "array",
+                              "items": [
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "grader-id": {
+                                      "type": "integer"
+                                    },
+                                    "results": {
+                                      "type": "object",
+                                      "properties": {
+                                        "overall": {
+                                          "type": "number"
+                                        },
+                                        "confidence": {
+                                          "type": "number"
+                                        }
+                                      },
+                                      "required": [
+                                        "overall",
+                                        "confidence"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "grader-id",
+                                    "results"
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "grader-results"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "part",
+                    "status",
+                    "answers"
+                  ]
+                }
+              ]
+            }
+          },
+          "required": [
+            "parts"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "results"
+      ]
+    }
+  },
+  "required": [
+    "type",
+    "parameters",
+    "notification"
+  ]
+}

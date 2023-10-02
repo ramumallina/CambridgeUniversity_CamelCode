@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "event": {
+      "type": "string"
+    },
+    "marketplaceId": {
+      "type": "integer"
+    },
+    "contextObjectId": {
+      "type": "integer"
+    },
+    "contextObjectType": {
+      "type": "string"
+    },
+    "triggeringUserId": {
+      "type": "integer"
+    },
+    "triggeringUserName": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string"
+    },
+    "extraInfo": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "previousValue": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "value",
+        "previousValue"
+      ]
+    }
+  },
+  "required": [
+    "event",
+    "marketplaceId",
+    "contextObjectId",
+    "contextObjectType",
+    "triggeringUserId",
+    "triggeringUserName",
+    "timestamp",
+    "extraInfo"
+  ]
+}

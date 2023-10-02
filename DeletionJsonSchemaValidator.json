@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "items": [
+    {
+      "type": "object",
+      "properties": {
+        "programmeOfStudyIdentifier": {
+          "type": "string"
+        },
+        "productName": {
+          "type": ["string", "null"]
+        },
+        "component": {
+          "type": ["string", "null"]
+        },
+        "ceilMarkingMode": {
+          "type": ["string", "null"]
+        },
+        "hybridMarkingFloor": {
+          "type": ["integer", "null"]
+        },
+        "acceptableConfidence": {
+          "type": ["number", "null"]
+        },
+        "elitAutomarkingTemplateIdentifier": {
+      "type": ["string", "null"]
+    },
+    "elitAutomarkingTemplateVersion": {
+      "type": ["integer", "null"]
+    }
+      },
+      "required": [
+        "programmeOfStudyIdentifier"
+      ]
+    }
+  ]
+}
